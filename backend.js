@@ -106,8 +106,21 @@ io.on('connection', (socket) => {
                 backEndPlayers[socket.id].x += SPEED;
                 break;
         }
-        // Si el jugador sale de la pantalla, lo regresamos al otro lado
+    });
 
+    socket.on('joystick', ({
+        x,
+        y,
+        sequenceNumber
+    }) => {
+        backEndPlayers[socket.id].sequenceNumber = sequenceNumber;
+        
+        //Mover al jugador solo en direccion de x o y (no diagonal)
+        if (Math.abs(x) > Math.abs(y)) {
+            backEndPlayers[socket.id].x += SPEED * x;
+        } else {
+            backEndPlayers[socket.id].y += SPEED * y;
+        }
 
     });
 });

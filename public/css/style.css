@@ -1,0 +1,635 @@
+body {
+    margin: 0;
+    background-color: black;
+}
+canvas {
+    width: 100%;
+    height: 100%;
+    /*border: 1px solid rgba(112, 112, 112, 0.6);*/
+    background-color: black;
+}
+.contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajusta la altura según tus necesidades */
+    background-color: black; /* Solo para visualización */
+}
+.icon {
+    position: absolute;
+    padding: 8px;
+    right: 0;
+    font-size: 16px;
+    cursor: pointer;
+
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+html {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+caption, th, td {
+    text-align: left;
+    font-weight: normal;
+    vertical-align: middle;
+}
+q, blockquote {
+    quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none;
+}
+a img {
+    border: none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+    display: block;
+}
+/* -------------------------------- xBase rules -------------------------------- */
+html * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+body {
+    font-size: 1.6rem;
+    font-family: sans-serif;
+    color: #333;
+    background-color: #46ae00;
+    line-height: 1.6;
+    text-align: center;
+    height: 100%;
+}
+a {
+    color: #62c169;
+    text-decoration: none;
+}
+img, embed, object, video {
+    max-width: 100%;
+}
+/* -------------------------------- xModules - reusable parts of our design -------------------------------- */
+/* -------------------------------- xLayout - main components -------------------------------- */
+main {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.icon {
+    width: 54px;
+    height: 54px;
+    display: block;
+    overflow: show;
+}
+.icon svg {
+    max-width: 100%;
+}
+main {
+    position: absolute;
+}
+.fullscreen {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+.fullscreen .fs-icon {
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+}
+.fullscreen .fs-icon .outline {
+    fill: #82d44b;
+}
+.fullscreen .fs-icon .arrow {
+    fill: #82d44b;
+    -webkit-transition: prefixed-for-transition(-webkit-, fill 1s ease);
+    -moz-transition: prefixed-for-transition(-moz-, fill 1s ease);
+    -ms-transition: prefixed-for-transition(-ms-, fill 1s ease);
+    -o-transition: prefixed-for-transition(-o-, fill 1s ease);
+    transition: fill 1s ease;
+}
+.fullscreen .fs-icon .tl {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+    animation: tl 1s ease-in-out;
+}
+.fullscreen .fs-icon .tr {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+    animation: tr 1s ease-in-out;
+}
+.fullscreen .fs-icon .bl {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+    animation: bl 1s ease-in-out;
+}
+.fullscreen .fs-icon .br {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+    animation: br 1s ease-in-out;
+}
+.fullscreen:hover .fs-icon {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+}
+.fullscreen:hover .fs-icon .arrow {
+    fill: #fff;
+    -webkit-transition: prefixed-for-transition(-webkit-, fill 1s ease);
+    -moz-transition: prefixed-for-transition(-moz-, fill 1s ease);
+    -ms-transition: prefixed-for-transition(-ms-, fill 1s ease);
+    -o-transition: prefixed-for-transition(-o-, fill 1s ease);
+    transition: fill 1s ease;
+    -webkit-transition: prefixed-for-transition(-webkit-, transform 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, transform 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, transform 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, transform 0.5s ease-out);
+    transition: transform 0.5s ease-out;
+}
+.fullscreen:hover .fs-icon .tl {
+    -webkit-transform: translate(-4px, -4px);
+    -moz-transform: translate(-4px, -4px);
+    -ms-transform: translate(-4px, -4px);
+    -o-transform: translate(-4px, -4px);
+    transform: translate(-4px, -4px);
+}
+.fullscreen:hover .fs-icon .tr {
+    -webkit-transform: translate(4px, -4px);
+    -moz-transform: translate(4px, -4px);
+    -ms-transform: translate(4px, -4px);
+    -o-transform: translate(4px, -4px);
+    transform: translate(4px, -4px);
+}
+.fullscreen:hover .fs-icon .bl {
+    -webkit-transform: translate(-4px, 4px);
+    -moz-transform: translate(-4px, 4px);
+    -ms-transform: translate(-4px, 4px);
+    -o-transform: translate(-4px, 4px);
+    transform: translate(-4px, 4px);
+}
+.fullscreen:hover .fs-icon .br {
+    -webkit-transform: translate(4px, 4px);
+    -moz-transform: translate(4px, 4px);
+    -ms-transform: translate(4px, 4px);
+    -o-transform: translate(4px, 4px);
+    transform: translate(4px, 4px);
+}
+.fullscreen:active .fs-icon {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+}
+.fullscreen:active .fs-icon .arrow {
+    fill: #82d44b;
+    -webkit-transition: prefixed-for-transition(-webkit-, fill 1s ease);
+    -moz-transition: prefixed-for-transition(-moz-, fill 1s ease);
+    -ms-transition: prefixed-for-transition(-ms-, fill 1s ease);
+    -o-transition: prefixed-for-transition(-o-, fill 1s ease);
+    transition: fill 1s ease;
+    opacity: 0;
+}
+.fullscreen:active .fs-icon .tl {
+    -webkit-transform: translate(-60px, -60px);
+    -moz-transform: translate(-60px, -60px);
+    -ms-transform: translate(-60px, -60px);
+    -o-transform: translate(-60px, -60px);
+    transform: translate(-60px, -60px);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.2s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.2s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.2s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.2s ease-out);
+    transition: 0.2s ease-out;
+}
+.fullscreen:active .fs-icon .tr {
+    -webkit-transform: translate(60px, -60px);
+    -moz-transform: translate(60px, -60px);
+    -ms-transform: translate(60px, -60px);
+    -o-transform: translate(60px, -60px);
+    transform: translate(60px, -60px);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.2s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.2s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.2s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.2s ease-out);
+    transition: 0.2s ease-out;
+}
+.fullscreen:active .fs-icon .bl {
+    -webkit-transform: translate(-60px, 60px);
+    -moz-transform: translate(-60px, 60px);
+    -ms-transform: translate(-60px, 60px);
+    -o-transform: translate(-60px, 60px);
+    transform: translate(-60px, 60px);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.2s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.2s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.2s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.2s ease-out);
+    transition: 0.2s ease-out;
+}
+.fullscreen:active .fs-icon .br {
+    -webkit-transform: translate(60px, 60px);
+    -moz-transform: translate(60px, 60px);
+    -ms-transform: translate(60px, 60px);
+    -o-transform: translate(60px, 60px);
+    transform: translate(60px, 60px);
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.2s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.2s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.2s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.2s ease-out);
+    transition: 0.2s ease-out;
+}
+.fullscreen.full .fs-icon .tl, .fullscreen.full .fs-icon .br {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+}
+.fullscreen.full .fs-icon .tr, .fullscreen.full .fs-icon .bl {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    -webkit-transform-origin: 50%;
+    -moz-transform-origin: 50%;
+    -ms-transform-origin: 50%;
+    -o-transform-origin: 50%;
+    transform: 50%;
+    -webkit-transition: prefixed-for-transition(-webkit-, 0.5s ease-out);
+    -moz-transition: prefixed-for-transition(-moz-, 0.5s ease-out);
+    -ms-transition: prefixed-for-transition(-ms-, 0.5s ease-out);
+    -o-transition: prefixed-for-transition(-o-, 0.5s ease-out);
+    transition: 0.5s ease-out;
+}
+.fullscreen.full:hover .fs-icon {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+}
+.fullscreen.full:hover .fs-icon .tl {
+    -webkit-transform: translate(-8px, -8px);
+    -moz-transform: translate(-8px, -8px);
+    -ms-transform: translate(-8px, -8px);
+    -o-transform: translate(-8px, -8px);
+    transform: translate(-8px, -8px);
+}
+.fullscreen.full:hover .fs-icon .tr {
+    -webkit-transform: translate(8px, -8px);
+    -moz-transform: translate(8px, -8px);
+    -ms-transform: translate(8px, -8px);
+    -o-transform: translate(8px, -8px);
+    transform: translate(8px, -8px);
+}
+.fullscreen.full:hover .fs-icon .bl {
+    -webkit-transform: translate(-8px, 8px);
+    -moz-transform: translate(-8px, 8px);
+    -ms-transform: translate(-8px, 8px);
+    -o-transform: translate(-8px, 8px);
+    transform: translate(-8px, 8px);
+}
+.fullscreen.full:hover .fs-icon .br {
+    -webkit-transform: translate(8px, 8px);
+    -moz-transform: translate(8px, 8px);
+    -ms-transform: translate(8px, 8px);
+    -o-transform: translate(8px, 8px);
+    transform: translate(8px, 8px);
+}
+@keyframes tl {
+    0% {
+        transform: translate(8px, 8px);
+        opacity: 0;
+   }
+    15% {
+        opacity: 0;
+   }
+    40% {
+        opacity: 1;
+   }
+}
+@keyframes tr {
+    0% {
+        transform: translate(-8px, 8px);
+        opacity: 0;
+   }
+    15% {
+        opacity: 0;
+   }
+    40% {
+        opacity: 1;
+   }
+}
+@keyframes bl {
+    0% {
+        transform: translate(8px, -8px);
+        opacity: 0;
+   }
+    15% {
+        opacity: 0;
+   }
+    40% {
+        opacity: 1;
+   }
+}
+@keyframes br {
+    0% {
+        transform: translate(-8px, -8px);
+        opacity: 0;
+   }
+    15% {
+        opacity: 0;
+   }
+    40% {
+        opacity: 1;
+   }
+}
+
+
+/* Path: public\css\style.css */
+h1 {
+    text-align: center;
+  }
+  
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    background-color: rgba(69, 69, 69, 0.4);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .iconContainer {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -100px;
+    margin-top: -100px;
+  }
+  .iconContainer p {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 20px;
+    opacity: 0;
+    color: #fff;
+  }
+  
+  .phone {
+    position: relative;
+    left: 50%;
+    margin-left: -50px;
+    width: 0;
+    height: 0;
+    border: 0 solid #ffffff;
+    background: #000000;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+  .phone i {
+    text-align: center;
+    width: 100%;
+    line-height: 120px;
+    font-size: 50px;
+    color: #000000;
+    opacity: 0;
+  }
+  
+  @media only screen and (max-width: 640px) {
+    .overlay {
+      display: block;
+    }
+  
+    .overlay .phone {
+      -webkit-animation: sizeIncrease 0.5s forwards ease, borderIncrease 0.5s 0.5s forwards ease, rotateRight 0.7s 1s forwards ease;
+              animation: sizeIncrease 0.5s forwards ease, borderIncrease 0.5s 0.5s forwards ease, rotateRight 0.7s 1s forwards ease;
+    }
+  
+    .overlay .phone i {
+      -webkit-animation: fadeIn 0.5s 0.8s forwards ease;
+              animation: fadeIn 0.5s 0.8s forwards ease;
+    }
+  
+    .overlay .iconContainer p {
+      -webkit-animation: fadeIn 0.5s 1.3s forwards ease;
+              animation: fadeIn 0.5s 1.3s forwards ease;
+    }
+  }
+  /* KEYFRAMES
+  ------------------------------------------- */
+  /* Animate width + height */
+  @-webkit-keyframes sizeIncrease {
+    0% {
+      width: 0;
+      height: 10px;
+    }
+    50% {
+      width: 100px;
+      height: 10px;
+    }
+    100% {
+      width: 100px;
+      height: 160px;
+    }
+  }
+  @keyframes sizeIncrease {
+    0% {
+      width: 0;
+      height: 10px;
+    }
+    50% {
+      width: 100px;
+      height: 10px;
+    }
+    100% {
+      width: 100px;
+      height: 160px;
+    }
+  }
+  /* Add borders */
+  @-webkit-keyframes borderIncrease {
+    100% {
+      border-width: 20px 10px;
+    }
+  }
+  @keyframes borderIncrease {
+    100% {
+      border-width: 20px 10px;
+    }
+  }
+  /* fade-in  */
+  @-webkit-keyframes fadeIn {
+    100% {
+      color: #ffffff;
+      opacity: 1;
+    }
+  }
+  @keyframes fadeIn {
+    100% {
+      color: #ffffff;
+      opacity: 1;
+    }
+  }
+  /* Rotate device */
+  @-webkit-keyframes rotateRight {
+    100% {
+      transform: rotate(90deg);
+    }
+  }
+  @keyframes rotateRight {
+    100% {
+      transform: rotate(90deg);
+    }
+  }
+
+*, *:before, *:after {
+box-sizing: border-box;
+}
+  
+  .joystick-base {
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    height: 116px;
+    width: 116px;
+    border-radius: 100%;
+    border: 10px solid rgba(0, 136, 204, 0.1);
+    background: rgba(0, 136, 204, 0.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) inset, 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s;
+    cursor: pointer;
+    touch-action: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
+  .joystick-base:hover, .joystick-base.active {
+    border-color: rgba(0, 136, 204, 0.2);
+  }
+  .joystick-base:hover .joystick-shaft, .joystick-base.active .joystick-shaft {
+    background: rgba(0, 136, 204, 0.35);
+  }
+  .joystick-base.active {
+    background: rgba(0, 136, 204, 0.1);
+  }
+  
+  .joystick-shaft {
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    height: 64px;
+    width: 64px;
+    border-radius: 100%;
+    background: rgba(0, 136, 204, 0.25);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7) inset;
+    transition: background 0.3s;
+    will-change: transform;
+    touch-action: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  }
