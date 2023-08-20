@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0;
+        background-color: black;
+      }
+      canvas {
+        width: 90%;
+        height: 85%;
+        border: 1px solid white;
+        background-color: black;
+      }
+      .contenedor {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Ajusta la altura según tus necesidades */
+        background-color: black; /* Solo para visualización */
+      }
+      #fullscreen-button {
+        position: absolute;
+        padding: 8px;
+        right: 0;
+        font-size: 16px;
+        cursor: pointer;
+        
+      }
+    </style>
+  </head>
+  <body style="overflow: hidden;">
+    <div
+      style="
+        position: absolute;
+        color: white;
+        padding: 8px;
+        font-family: sans-serif;
+        font-size: 14px;
+        user-select: none;
+      "
+    >
+      <span>Score: <span id="scoreEl">0</span></span>
+    </div>
+    <button id="fullscreen-button"></button>
+    <div class="contenedor">
+      <canvas></canvas>
+    </div>
+    <script>
+      const fullscreenButton = document.getElementById('fullscreen-button');
+      
+      fullscreenButton.addEventListener('click', () => {
+        if (document.fullscreenEnabled) {
+          if (document.fullscreenElement) {
+            document.exitFullscreen();
+          } else {
+            document.documentElement.requestFullscreen().catch(err => {
+              console.log(`Error al entrar en pantalla completa: ${err.message}`);
+            });
+          }
+        }
+      });
+      </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
+      integrity="sha512-kVlGhj2qFy+KBCFuvjBJTGUMxbdqJKs4yK2jh0e0VPhWUPiPC87bzm4THmaaIee3Oj7j6sDpTTgm2EPPiESqBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="./js/classes/Enemy.js"></script>
+    <script src="./js/classes/Player.js"></script>
+    <script src="./js/classes/Particle.js"></script>
+    <script src="./js/classes/Projectile.js"></script>
+    <script src="./js/frontend.js"></script>
+    <script src="./js/eventListeners.js"></script>
+  </body>
+</html>
