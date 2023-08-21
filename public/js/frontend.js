@@ -1,5 +1,6 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+
 // Get username from local storage
 const username = localStorage.getItem('username');
 // Add username to the form
@@ -7,12 +8,12 @@ document.querySelector('#usernameInput').value = username;
 
 const socket = io();
 
-const scoreEl = document.querySelector('#scoreEl');
-
 const devicePixelRatio = window.devicePixelRatio || 1;
 
-canvas.width = innerWidth * devicePixelRatio;
-canvas.height = innerHeight * devicePixelRatio;
+canvas.width = 1024 * devicePixelRatio;
+canvas.height = 576 * devicePixelRatio;
+
+c.scale(devicePixelRatio, devicePixelRatio);
 
 const x = canvas.width / 2;
 const y = canvas.height / 2;
@@ -70,7 +71,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
         player_id.innerHTML = `<span style="color: ${backEndPlayer.color}">${backEndPlayer.username}</span>: ${backEndPlayer.score}`;
       }
       player_id.setAttribute('data-score', backEndPlayer.score);
-      
+
       // Sort the player labels by score
       const parenDiv = document.querySelector('#playerLabels');
       const childDivs = Array.from(parenDiv.querySelectorAll('div'));
@@ -80,7 +81,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
         const scoreB = Number(b.getAttribute('data-score'));
         return scoreB - scoreA;
       });
-      
+
       childDivs.forEach((div) => {
         parenDiv.removeChild(div);
       });
@@ -127,7 +128,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
       if (player_id) {
         player_id.parentNode.removeChild(player_id);
       }
-      
+
       if (id === socket.id) {
         // If the player is dead, show the form again
         document.querySelector('#formContainer').style.display = 'flex';
@@ -138,7 +139,8 @@ socket.on('updatePlayers', (backEndPlayers) => {
   }
 
 });
-
+//const enemies = []
+//
 //function spawnEnemies() {
 //  setInterval(() => {
 //    const radius = Math.random() * (30 - 4) + 4
@@ -164,7 +166,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
 //    }
 //
 //    enemies.push(new Enemy(x, y, radius, color, velocity))
-//  }, SPEED00)
+//  }, 5000)
 //}
 
 let animationId
@@ -183,13 +185,6 @@ function animate() {
     const frontEndProjectile = frontEndProjectiles[id];
     frontEndProjectile.draw();
   }
-
-  //for (let i = frontEndProjectiles.length - 1; i >= 0; i--) {
-  //  const frontEndProjectile = frontEndProjectiles[i];
-  //  frontEndProjectile.update();
-  //}
-
-
 
 }
 
@@ -317,13 +312,13 @@ document.querySelector('#usernameForm').addEventListener('submit', (event) => {
   document.querySelector('#formContainer').style.display = 'none';
 
   socket.emit('initGame', {
-    x: canvas.width / 2,
-    y: canvas.height / 2,
     color: `hsl(${Math.random() * 360}, 50%, 50%)`,
     username,
-    width: canvas.width, 
+    width: canvas.width,
     height: canvas.height,
     devicePixelRatio
   });
+  //Remove the display none from the canvas
+  document.querySelector('#game').removeAttribute('style');
 
 });

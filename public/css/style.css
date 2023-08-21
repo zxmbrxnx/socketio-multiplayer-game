@@ -4,16 +4,21 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0;
   background-color: black;
+
+  font-size: 1.6rem;
+  font-family: sans-serif;
+  color: #333;
+  line-height: 1.6;
+  text-align: center;
 }
 
 input::placeholder {
   color: #94a3b8;
 }
 canvas {
-    width: 100%;
-    height: 100%;
-    /*border: 1px solid rgba(112, 112, 112, 0.6);*/
-    background-color: black;
+    width: 1024px;
+    height: 576px;
+    border: 1px solid rgb(255, 255, 255) !important;
 }
 .contenedor {
     display: flex;
@@ -25,9 +30,11 @@ canvas {
 .icon {
     position: absolute;
     padding: 8px;
-    right: 0;
+    top: 5px;
+    right: 15;
     font-size: 16px;
     cursor: pointer;
+    z-index: 1000;
 
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -78,15 +85,6 @@ html * {
 }
 html {
     font-size: 62.5%;
-    height: 100%;
-}
-body {
-    font-size: 1.6rem;
-    font-family: sans-serif;
-    color: #333;
-    background-color: #46ae00;
-    line-height: 1.6;
-    text-align: center;
     height: 100%;
 }
 a {
@@ -513,6 +511,15 @@ h1 {
   @media only screen and (max-width: 640px) {
     .overlay {
       display: block;
+    }
+    #game{
+      display: none;
+    }
+    .joystick-base{
+      display: none;
+    }
+    #formContainer{
+      display: none !important;
     }
   
     .overlay .phone {

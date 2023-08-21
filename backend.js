@@ -34,20 +34,6 @@ io.on('connection', (socket) => {
 
     io.emit('updatePlayers', backEndPlayers);
 
-    socket.on('initCanvas', ({width, height, devicePixelRatio}) => {
-        if(!backEndPlayers[socket.id]) return;
-        backEndPlayers[socket.id].canvas = {
-            width: width,
-            height: height, 
-        }
-
-        if (devicePixelRatio > 1){
-            backEndPlayers[socket.id].radius = 2 * RADIUS;
-        } else {
-            backEndPlayers[socket.id].radius = RADIUS;
-        }
-    });
-
     socket.on('shoot', ({
         x,
         y,
@@ -68,10 +54,10 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('initGame', ({x, y, color, username, width, height, devicePixelRatio}) => {
+    socket.on('initGame', ({color, username, width, height, devicePixelRatio}) => {
         backEndPlayers[socket.id] = {
-            x: x + (10 * Math.random()),
-            y: y + (10 * Math.random()),
+            x: 612,
+            y: 238,
             color: color,
             sequenceNumber: 0,
             score: 0,

@@ -229,7 +229,7 @@ window.addEventListener('load', () => {
     // Lets animate the background colour around using hsl to show the degree of control this has!
     // Puns are funny.
     joystick.ondeactivate = function () {
-        document.body.removeAttribute('style');
+        //document.body.removeAttribute('style');
 
         //Detener al jugador
         keys.w.pressed = false;
@@ -240,7 +240,7 @@ window.addEventListener('load', () => {
     };
 
     joystick.ondrag = function () {
-        document.body.style.background = `hsl(${this.shaft.current.angle}, ${this.shaft.current.percentage}%, 50%)`;
+        //document.body.style.background = `hsl(${this.shaft.current.angle}, ${this.shaft.current.percentage}%, 50%)`;
 
         //Mostrar los valores de la posición del joystick en consola
         //console.log(this.shaft.current.vector.x);

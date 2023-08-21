@@ -184,7 +184,7 @@
     })();
     
     $(".fullscreen").click(function () {
-         $(document).toggleFullScreen();
+         $(document).toggleFullScreen();    
     });
      
     
