@@ -10,9 +10,8 @@ const socket = io();
 
 const devicePixelRatio = window.devicePixelRatio || 1;
 
-canvas.width = 1024 * devicePixelRatio;
-canvas.height = 576 * devicePixelRatio;
-
+canvas.width = innerWidth * devicePixelRatio;
+canvas.height = innerHeight * devicePixelRatio;
 c.scale(devicePixelRatio, devicePixelRatio);
 
 const x = canvas.width / 2;
@@ -322,3 +321,15 @@ document.querySelector('#usernameForm').addEventListener('submit', (event) => {
   document.querySelector('#game').removeAttribute('style');
 
 });
+
+
+// Onload
+function showJoystick() {
+  let containerJoystick = document.getElementById("containerJoystick");
+  // Verificar si tiene la clase hidden
+  if (containerJoystick.classList.contains("hidden")) {
+      containerJoystick.classList.remove("hidden");
+  } else {
+      containerJoystick.classList.add("hidden");
+  }
+}

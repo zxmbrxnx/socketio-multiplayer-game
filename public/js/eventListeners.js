@@ -20,14 +20,36 @@ addEventListener('click', (event) => {
     });
     setTimeout(() => {
         canShoot = true;
-    }, 300);
-
+    }, 100);
+    /* frontEndProjectiles.push(
+        new Projectile({
+            x: playerPosition.x,
+            y: playerPosition.y,
+            radius: 5,
+            color: 'white',
+            velocity: velocity
+        })
+    ); */
+    //console.log(frontEndProjectiles);
 });
 
 window.addEventListener('resize', () => {
-    canvas.width = 1024 * devicePixelRatio;
-    canvas.height = 576 * devicePixelRatio;
-    canvas.style.width = '1024px';
-    canvas.style.height = '576px';
-    c.scale(devicePixelRatio, devicePixelRatio);
+    canvas.width = window.innerWidth * window.devicePixelRatio;
+    canvas.height = window.innerHeight * window.devicePixelRatio;
+    c.scale(window.devicePixelRatio, window.devicePixelRatio);
+    //socket.emit('initCanvas', {
+    //    widht: canvas.width,
+    //    height: canvas.height
+    //});
 });
+
+
+function showJoystick() {
+    let containerJoystick = document.getElementById("containerJoystick");
+    // Verificar si tiene la clase hidden
+    if (containerJoystick.classList.contains("hidden")) {
+        containerJoystick.classList.remove("hidden");
+    } else {
+        containerJoystick.classList.add("hidden");
+    }
+}

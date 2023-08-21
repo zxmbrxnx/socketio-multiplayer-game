@@ -16,8 +16,8 @@ input::placeholder {
   color: #94a3b8;
 }
 canvas {
-    width: 1024px;
-    height: 576px;
+    width: 100%;
+    height: 100%;
     border: 1px solid rgb(255, 255, 255) !important;
 }
 .contenedor {
@@ -27,6 +27,32 @@ canvas {
     height: 100vh; /* Ajusta la altura según tus necesidades */
     background-color: black; /* Solo para visualización */
 }
+.iconControl {
+    position: absolute;
+    display: block;
+    top: 13px;
+    right: 70px;
+    z-index: 1000;
+}
+.hidden {
+    display: none;
+}
+
+#joystickButton {
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+  background-color: transparent;
+  color: #82d44b;
+  border: 3px solid #82d44b;
+  border-radius: 1px;
+  cursor: pointer;
+}
+
+#joystickButton:hover {
+  color: #fff;
+}
+
 .icon {
     position: absolute;
     padding: 8px;
@@ -515,9 +541,6 @@ h1 {
     #game{
       display: none;
     }
-    .joystick-base{
-      display: none;
-    }
     #formContainer{
       display: none !important;
     }
@@ -609,6 +632,7 @@ box-sizing: border-box;
 }
   
   .joystick-base {
+    z-index: 1000;
     position: fixed;
     bottom: 32px;
     left: 32px;

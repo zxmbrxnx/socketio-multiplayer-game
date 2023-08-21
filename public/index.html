@@ -38,8 +38,15 @@
       </div>
       <div id="playerLabels" style="text-align: left"></div>
     </div>
-    <div class="joystick-base" touch-action="none">
-      <div class="joystick-shaft" touch-action="none"></div>
+    <div id="containerJoystick" class="">
+      <div class="joystick-base" touch-action="none">
+        <div class="joystick-shaft" touch-action="none"></div>
+      </div>
+    </div>
+    <div class="iconControl">
+      <button id="joystickButton" class="joystickButton" onclick="showJoystick()">
+        <i class="fa-solid fa-gamepad"></i>
+      </button>
     </div>
     <div class="icon">
       <a class="fullscreen" href="#!"
