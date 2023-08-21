@@ -130,7 +130,7 @@ socket.on('updatePlayers', (backEndPlayers) => {
       
       if (id === socket.id) {
         // If the player is dead, show the form again
-        document.querySelector('#formContainer').style.display = 'block';
+        document.querySelector('#formContainer').style.display = 'flex';
       }
 
       delete frontEndPlayers[id];

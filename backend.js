@@ -10,7 +10,7 @@ const io = new Server(server, {
     pingInterval: 2000,
     pingTimeout: 5000
 });
-const port = 80;
+const port = 3000;
 
 const SPEED = 5;
 let projectileId = 0;
