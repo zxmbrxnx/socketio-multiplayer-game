@@ -3,12 +3,17 @@
     <title>Multiplayer Game</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-    </style>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style></style>
   </head>
-  <body style="overflow: hidden;">
+  <body style="overflow: hidden">
     <div class="overlay">
       <div class="iconContainer">
         <div class="phone"><i class="fa fa-repeat"></i></div>
@@ -26,38 +31,111 @@
         background-color: rgba(0, 0, 0, 0.5);
       "
     >
-    <div style="margin-bottom: 5px; font-weight: bold;">Leaderboard</div>
-    <div>
-      <div>Player 1: 0</div>
-      <div>Player 2: 0</div>
-      <div>Player 3: 0</div>
-    </div>
+      <div style="margin-bottom: 5px; font-weight: bold; text-align: left">
+        Leaderboard
+      </div>
+      <div id="playerLabels" style="text-align: left"></div>
     </div>
     <div class="joystick-base" touch-action="none">
       <div class="joystick-shaft" touch-action="none"></div>
     </div>
     <div class="icon">
-      <a class="fullscreen" href="#!"><svg class="fs-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
-
+      <a class="fullscreen" href="#!"
+        ><svg
+          class="fs-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          version="1.1"
+          x="0px"
+          y="0px"
+          viewBox="0 0 100 100"
+          enable-background="new 0 0 100 100"
+          xml:space="preserve"
+        >
           <!-- Top Right -->
-          <path class="tr arrow" d="M74.6 33.6l0-4.3L63.2 40.7c-1.1 1.1-2.8 1.1-3.8 0c-1.1-1.1-1.1-2.8 0-3.9l11.4-11.4h-4.3 c-1.5 0-2.7-1.2-2.7-2.7c0-1.5 1.2-2.7 2.7-2.7h10.9c1.5 0 2.7 1.2 2.7 2.7v10.9c0 1.5-1.2 2.7-2.7 2.7 C75.8 36.3 74.6 35.1 74.6 33.6z"/>
+          <path
+            class="tr arrow"
+            d="M74.6 33.6l0-4.3L63.2 40.7c-1.1 1.1-2.8 1.1-3.8 0c-1.1-1.1-1.1-2.8 0-3.9l11.4-11.4h-4.3 c-1.5 0-2.7-1.2-2.7-2.7c0-1.5 1.2-2.7 2.7-2.7h10.9c1.5 0 2.7 1.2 2.7 2.7v10.9c0 1.5-1.2 2.7-2.7 2.7 C75.8 36.3 74.6 35.1 74.6 33.6z"
+          />
 
           <!-- Top Left -->
-          <path class="tl arrow" d="M33.6 25.4h-4.3l11.4 11.4c1.1 1.1 1.1 2.8 0 3.8c-1.1 1.1-2.8 1.1-3.8 0L25.4 29.3v4.3 c0 1.5-1.2 2.7-2.7 2.7c-1.5 0-2.7-1.2-2.7-2.7V22.7c0-1.5 1.2-2.7 2.7-2.7l10.9 0c1.5 0 2.7 1.2 2.7 2.7 C36.3 24.2 35.1 25.4 33.6 25.4z"/>
+          <path
+            class="tl arrow"
+            d="M33.6 25.4h-4.3l11.4 11.4c1.1 1.1 1.1 2.8 0 3.8c-1.1 1.1-2.8 1.1-3.8 0L25.4 29.3v4.3 c0 1.5-1.2 2.7-2.7 2.7c-1.5 0-2.7-1.2-2.7-2.7V22.7c0-1.5 1.2-2.7 2.7-2.7l10.9 0c1.5 0 2.7 1.2 2.7 2.7 C36.3 24.2 35.1 25.4 33.6 25.4z"
+          />
 
           <!-- Bottom Left -->
-          <path class="bl arrow" d="M25.4 66.4l0 4.3l11.4-11.4c1.1-1.1 2.8-1.1 3.8 0c1.1 1.1 1.1 2.8 0 3.9L29.3 74.6h4.3 c1.5 0 2.7 1.2 2.7 2.7c0 1.5-1.2 2.7-2.7 2.7H22.7c-1.5 0-2.7-1.2-2.7-2.7V66.4c0-1.5 1.2-2.7 2.7-2.7 C24.2 63.7 25.4 64.9 25.4 66.4z"/>
+          <path
+            class="bl arrow"
+            d="M25.4 66.4l0 4.3l11.4-11.4c1.1-1.1 2.8-1.1 3.8 0c1.1 1.1 1.1 2.8 0 3.9L29.3 74.6h4.3 c1.5 0 2.7 1.2 2.7 2.7c0 1.5-1.2 2.7-2.7 2.7H22.7c-1.5 0-2.7-1.2-2.7-2.7V66.4c0-1.5 1.2-2.7 2.7-2.7 C24.2 63.7 25.4 64.9 25.4 66.4z"
+          />
 
           <!-- Bottom Right -->
-          <path class="br arrow" d="M66.4 74.6h4.3L59.3 63.2c-1.1-1.1-1.1-2.8 0-3.8c1.1-1.1 2.8-1.1 3.8 0l11.4 11.4v-4.3 c0-1.5 1.2-2.7 2.7-2.7c1.5 0 2.7 1.2 2.7 2.7v10.9c0 1.5-1.2 2.7-2.7 2.7l-10.9 0c-1.5 0-2.7-1.2-2.7-2.7 C63.7 75.8 64.9 74.6 66.4 74.6z"/>
+          <path
+            class="br arrow"
+            d="M66.4 74.6h4.3L59.3 63.2c-1.1-1.1-1.1-2.8 0-3.8c1.1-1.1 2.8-1.1 3.8 0l11.4 11.4v-4.3 c0-1.5 1.2-2.7 2.7-2.7c1.5 0 2.7 1.2 2.7 2.7v10.9c0 1.5-1.2 2.7-2.7 2.7l-10.9 0c-1.5 0-2.7-1.2-2.7-2.7 C63.7 75.8 64.9 74.6 66.4 74.6z"
+          />
 
           <!-- Outline -->
-          <path class="outline" d="M94 5c0.5 0 1 0.5 1 1v88c0 0.5-0.5 1-1 1H6c-0.5 0-1-0.5-1-1V6c0-0.5 0.5-1 1-1H94 M94 0H6C2.7 0 0 2.7 0 6v88 c0 3.3 2.7 6 6 6h88c3.3 0 6-2.7 6-6V6C100 2.7 97.3 0 94 0L94 0z"/>
+          <path
+            class="outline"
+            d="M94 5c0.5 0 1 0.5 1 1v88c0 0.5-0.5 1-1 1H6c-0.5 0-1-0.5-1-1V6c0-0.5 0.5-1 1-1H94 M94 0H6C2.7 0 0 2.7 0 6v88 c0 3.3 2.7 6 6 6h88c3.3 0 6-2.7 6-6V6C100 2.7 97.3 0 94 0L94 0z"
+          />
         </svg>
       </a>
-  </div>
+    </div>
     <div class="contenedor">
       <canvas id="game"></canvas>
+      <!-- username input -->
+      <div
+        id="formContainer"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        "
+      >
+        <form class="form-initial" id="usernameForm">
+          <div>
+            <input
+              id="usernameInput" 
+              type="text"
+              placeholder="Username"
+              style="
+                padding: 12px;
+                border-radius: 10px;
+                border: none;
+                background: #475569;
+                color: #fafafa;
+              "
+            />
+          </div>
+          <div style="text-align: center; margin-top: 8px">
+            <button
+              style="
+                padding: 8px 20px;
+                border-radius: 10px;
+                border: none;
+                background-image: linear-gradient(
+                  to right,
+                  rgb(11, 209, 143),
+                  rgb(53, 124, 168)
+                );
+                color: white;
+                cursor: pointer;
+              "
+            >
+              ¡Jugar!
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- username input end -->
     </div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.2/gsap.min.js"
@@ -65,8 +143,16 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <script src="./js/librerias/pep.js" integrity="sha256-yZpZULjaPllFSRFfS6JsDvucyRd3yNo7yKc/YsMQAsk=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="./js/librerias/pep.js"
+      integrity="sha256-yZpZULjaPllFSRFfS6JsDvucyRd3yNo7yKc/YsMQAsk="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
     <script src="./js/classes/Enemy.js"></script>
     <script src="./js/classes/Player.js"></script>

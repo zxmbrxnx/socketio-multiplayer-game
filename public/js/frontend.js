@@ -1,5 +1,9 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+// Get username from local storage
+const username = localStorage.getItem('username');
+// Add username to the form
+document.querySelector('#usernameInput').value = username;
 
 const socket = io();
 
@@ -17,18 +21,8 @@ const frontEndPlayers = {}
 const frontEndProjectiles = {}
 
 socket.on('connect', () => {
-
-  socket.emit('createPlayer', { 
-    x: canvas.width / 2,
-    y: canvas.height / 2,
-    color: `hsl(${Math.random() * 360}, 50%, 50%)`
-  });
-
-  socket.emit('initCanvas', {
-    width: canvas.width, 
-    height: canvas.height,
-    devicePixelRatio
-  });
+  console.log('Connected to server');
+  socket.emit('joinGame', {});
 });
 
 socket.on('updateProjectiles', (backEndProjectiles) => {
@@ -64,7 +58,37 @@ socket.on('updatePlayers', (backEndPlayers) => {
         radius: 20,
         color: backEndPlayer.color
       });
+      document.querySelector(
+        '#playerLabels'
+      ).innerHTML += `<div data-id="${id}" data-score="${backEndPlayer.score}">
+                              <span style="color: ${backEndPlayer.color}">${backEndPlayer.username}</span>: ${backEndPlayer.score}
+                      </div>`;
     } else {
+
+      const player_id = document.querySelector(`#playerLabels div[data-id="${id}"]`);
+      if (player_id) {
+        player_id.innerHTML = `<span style="color: ${backEndPlayer.color}">${backEndPlayer.username}</span>: ${backEndPlayer.score}`;
+      }
+      player_id.setAttribute('data-score', backEndPlayer.score);
+      
+      // Sort the player labels by score
+      const parenDiv = document.querySelector('#playerLabels');
+      const childDivs = Array.from(parenDiv.querySelectorAll('div'));
+
+      childDivs.sort((a, b) => {
+        const scoreA = Number(a.getAttribute('data-score'));
+        const scoreB = Number(b.getAttribute('data-score'));
+        return scoreB - scoreA;
+      });
+      
+      childDivs.forEach((div) => {
+        parenDiv.removeChild(div);
+      });
+
+      childDivs.forEach((div) => {
+        parenDiv.appendChild(div);
+      });
+
       if (id === socket.id) {
         // If a player is already in frontEndPlayers, update its position
         frontEndPlayers[id].x = backEndPlayer.x;
@@ -97,6 +121,18 @@ socket.on('updatePlayers', (backEndPlayers) => {
   }
   for (const id in frontEndPlayers) {
     if (!backEndPlayers[id]) {
+      // Obtener el elemento por su data-id en el Leaderboard
+      const player_id = document.querySelector(`#playerLabels div[data-id="${id}"]`);
+      // Verificar si el elemento existe antes de intentar eliminarlo
+      if (player_id) {
+        player_id.parentNode.removeChild(player_id);
+      }
+      
+      if (id === socket.id) {
+        // If the player is dead, show the form again
+        document.querySelector('#formContainer').style.display = 'block';
+      }
+
       delete frontEndPlayers[id];
     }
   }
@@ -269,4 +305,25 @@ window.addEventListener('keyup', (event) => {
       keys.d.pressed = false;
       break;
   }
+});
+
+document.querySelector('#usernameForm').addEventListener('submit', (event) => {
+  event.preventDefault();
+  const username = document.querySelector('#usernameInput').value;
+  //Save username in local storage
+  localStorage.setItem('username', username);
+
+  // Hide the form
+  document.querySelector('#formContainer').style.display = 'none';
+
+  socket.emit('initGame', {
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    color: `hsl(${Math.random() * 360}, 50%, 50%)`,
+    username,
+    width: canvas.width, 
+    height: canvas.height,
+    devicePixelRatio
+  });
+
 });

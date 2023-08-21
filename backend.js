@@ -10,7 +10,7 @@ const io = new Server(server, {
     pingInterval: 2000,
     pingTimeout: 5000
 });
-const port = 3000;
+const port = 80;
 
 const SPEED = 5;
 let projectileId = 0;
@@ -28,22 +28,10 @@ const backEndProjectiles = {};
 
 io.on('connection', (socket) => {
 
-    //backEndPlayers[socket.id] = {
-    //    x: 100 * Math.random(),
-    //    y: 100 * Math.random(),
-    //    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-    //    sequenceNumber: 0
-    //}
-    socket.on('createPlayer', ({ x, y, color }) => {
-        backEndPlayers[socket.id] = {
-            x: x + (10 * Math.random()),
-            y: y + (10 * Math.random()),
-            color: color,
-            sequenceNumber: 0
-        };
+    socket.on('joinGame', () => {
+        console.log('espectador connected: ' + socket.id);
     });
 
-    //console.log(backEndPlayers);
     io.emit('updatePlayers', backEndPlayers);
 
     socket.on('initCanvas', ({width, height, devicePixelRatio}) => {
@@ -54,7 +42,7 @@ io.on('connection', (socket) => {
         }
 
         if (devicePixelRatio > 1){
-            backEndPlayers[socket.id].radius = 5 * RADIUS;
+            backEndPlayers[socket.id].radius = 2 * RADIUS;
         } else {
             backEndPlayers[socket.id].radius = RADIUS;
         }
@@ -69,14 +57,37 @@ io.on('connection', (socket) => {
         projectileId++;
 
         const velocity = {
-            x: Math.cos(angle) * 20,
-            y: Math.sin(angle) * 20
+            x: Math.cos(angle) * 10,
+            y: Math.sin(angle) * 10
         }
         backEndProjectiles[projectileId] = {
             x: x,
             y: y,
             velocity: velocity,
             playerId: socket.id
+        }
+    });
+
+    socket.on('initGame', ({x, y, color, username, width, height, devicePixelRatio}) => {
+        backEndPlayers[socket.id] = {
+            x: x + (10 * Math.random()),
+            y: y + (10 * Math.random()),
+            color: color,
+            sequenceNumber: 0,
+            score: 0,
+            username: username
+        };
+
+        if(!backEndPlayers[socket.id]) return;
+        backEndPlayers[socket.id].canvas = {
+            width: width,
+            height: height, 
+        }
+
+        if (devicePixelRatio > 1){
+            backEndPlayers[socket.id].radius = 2 * RADIUS;
+        } else {
+            backEndPlayers[socket.id].radius = RADIUS;
         }
     });
 
@@ -157,6 +168,10 @@ setInterval(() => {
                 backEndProjectiles[id].playerId !== playerId
             ) {
                 if (backEndProjectiles[id].playerId !== playerId) {
+                    if (backEndPlayers[backEndProjectiles[id].playerId]) {
+                        backEndPlayers[backEndProjectiles[id].playerId].score++;
+                    }
+                    //console.log(backEndPlayers[backEndProjectiles[id].playerId]);
                     delete backEndProjectiles[id];
                     delete backEndPlayers[playerId];
                     break;

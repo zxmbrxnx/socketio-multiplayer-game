@@ -1,6 +1,13 @@
 body {
-    margin: 0;
-    background-color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  background-color: black;
+}
+
+input::placeholder {
+  color: #94a3b8;
 }
 canvas {
     width: 100%;
@@ -633,3 +640,7 @@ box-sizing: border-box;
     touch-action: none;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }
+
+.form-initial{
+
+}
